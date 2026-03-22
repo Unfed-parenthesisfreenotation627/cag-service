@@ -1,0 +1,72 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "cag-service"
+version = "1.0.0"
+description = "Cache-Augmented Generation as a Service — pre-load your knowledge, query with any LLM."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.11"
+keywords = ["cag", "llm", "ai", "rag", "cache", "generation", "nlp", "fastapi"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+# Core dependencies (minimal)
+dependencies = [
+    "fastapi>=0.111.0",
+    "uvicorn[standard]>=0.29.0",
+    "pydantic>=2.7.0",
+    "python-dotenv>=1.0.1",
+]
+
+[project.optional-dependencies]
+# Install the backend you need
+ollama       = ["ollama>=0.2.1"]
+openai       = ["openai>=1.30.0"]
+anthropic    = ["anthropic>=0.28.0"]
+huggingface  = ["huggingface_hub>=0.23.0"]
+
+# Convenience bundles
+all-backends = [
+    "ollama>=0.2.1",
+    "openai>=1.30.0",
+    "anthropic>=0.28.0",
+    "huggingface_hub>=0.23.0",
+]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+    "httpx>=0.27",          # for FastAPI TestClient
+    "ruff>=0.4",
+    "mypy>=1.10",
+]
+
+[project.urls]
+Homepage    = "https://github.com/yourorg/cag-service"
+Repository  = "https://github.com/yourorg/cag-service"
+Issues      = "https://github.com/yourorg/cag-service/issues"
+Changelog   = "https://github.com/yourorg/cag-service/blob/main/CHANGELOG.md"
+
+[project.scripts]
+cag-service = "cag_service.api:app"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["cag_service*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"

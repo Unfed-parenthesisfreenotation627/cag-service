@@ -1,0 +1,65 @@
+version: "3.9"
+
+services:
+
+  # ---- Local LLM (Ollama) ------------------------------------------------
+  ollama:
+    image: ollama/ollama:latest
+    container_name: cag-ollama
+    volumes:
+      - ollama_data:/root/.ollama
+    ports:
+      - "11434:11434"
+    # GPU support (uncomment if you have NVIDIA GPU):
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11434/api/tags"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ---- Model pull (runs once, pulls llama3.3) ----------------------------
+  ollama-pull:
+    image: ollama/ollama:latest
+    container_name: cag-ollama-pull
+    depends_on:
+      ollama:
+        condition: service_healthy
+    environment:
+      - OLLAMA_HOST=http://ollama:11434
+    entrypoint: ["ollama", "pull", "llama3.3"]
+    restart: "no"
+
+  # ---- CAG Service API ---------------------------------------------------
+  cag-service:
+    build: .
+    container_name: cag-api
+    depends_on:
+      ollama:
+        condition: service_healthy
+    environment:
+      - CAG_PROVIDER=ollama
+      - CAG_MODEL=llama3.3
+      - CAG_CORPUS=sops
+      - OLLAMA_HOST=http://ollama:11434
+      # Uncomment to use OpenAI instead:
+      # - CAG_PROVIDER=openai
+      # - CAG_MODEL=gpt-4o
+      # - OPENAI_API_KEY=sk-...
+    ports:
+      - "8000:8000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    restart: unless-stopped
+
+volumes:
+  ollama_data:
